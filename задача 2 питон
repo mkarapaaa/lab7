@@ -1,0 +1,26 @@
+import math
+
+def exact_solution(x):
+    return (math.exp(-x**2) * x**2) / 2
+
+def euler_method(x0, y0, h, x_final):
+    x = x0
+    y = y0
+    
+    print("x\t Numerical solution\t Exact solution\t Error")
+    
+    while x <= x_final:
+        numerical_solution = y + h * (-2*x*y - x*math.exp(-x**2))
+        error = abs(numerical_solution - exact_solution(x))
+        
+        print(f"{x}\t {y}\t {exact_solution(x)}\t {error}")
+        
+        y = numerical_solution
+        x += h
+
+x0 = 0.0
+y0 = 0.0
+h = 0.1
+x_final = 1.0
+
+euler_method(x0, y0, h, x_final)
