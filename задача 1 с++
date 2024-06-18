@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// Функция для вычисления производной
+double derivative(double x, double y) {
+    return -y + exp(x);
+}
+
+// Функция для вычисления точного решения
+double exact_solution(double x) {
+    return (exp(x) / 2) + exp(-x);
+}
+
+int main() {
+    double x0 = 0.0;
+    double y0 = 1.5;
+    double x_end = 1.0;
+    double h = 0.1;
+
+    double x = x0;
+    double y = y0;
+
+    cout << "x\tEuler\tExact\tDifference" << endl;
+
+    while (x <= x_end) {
+        double y_next = y + h * derivative(x, y);
+        double exact = exact_solution(x);
+        double diff = abs(y_next - exact);
+     
+     cout << x << "\t" << y_next << "\t" << exact << "\t" << diff << endl;
+     
+        y = y_next;
+        x += h;
+    }
+
+    return 0;
+}
